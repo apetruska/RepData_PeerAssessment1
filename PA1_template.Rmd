@@ -12,7 +12,7 @@ Calculate number of steps taken per day, NA values will be ignored
 	colnames(totalsteps) <- c("Date","Total_Steps")
 ```
 Create histogram of total steps taken per day
-```{r}	
+```{r histtot,fig.path="figures/"}	
   hist(as.numeric(totalsteps$Total_Steps),main="Frequency of total steps per day",
 	xlab="Total Steps",col="green")
 ```
@@ -26,7 +26,7 @@ Calculate and report the mean and median of total steps per day
 ##Average Daily activity pattern
 Create a time series plot of the 5-minute interval (x-axis) 
 and the average number of steps taken, averaged across all days (y-axis)
-```{r}
+```{r avgsteps,fig.path="figures/"}
   avgsteps <- aggregate(data$steps,by=list(data$interval),mean,na.rm=TRUE)
 	colnames(avgsteps) <- c("Interval","Avg_Steps")
 	with(avgsteps,plot(Interval, Avg_Steps,type="l"
@@ -64,7 +64,7 @@ Calculate number of steps taken per day with imputed data
 	colnames(totalstepsimputed) <- c("Date","Total_Steps")
 ```
 Create histogram of total steps taken per day
-```{r}
+```{r histimp,fig.path="figures/"}
   hist(as.numeric(totalstepsimputed$Total_Steps),
 		main="Frequency of total steps per day (imputed data)",
 		xlab="Total Steps",col="blue")
@@ -96,7 +96,7 @@ Create new variable indicating whether the date is a weekend or weekday
 	imputed$Weekday_Weekend <- gsub("Sunday","Weekend",imputed$Weekday_Weekend)
 ```
 Create a panel plot containing a time series plot of the 5-minute interval and the average number of steps taken, averaged across all weekday days or weekend days.
-```{r}
+```{r weektime,fig.path="figures/"}
   avgsteps2 <- aggregate(imputed$steps,by=list(interval=imputed$interval,
     weekday=imputed$Weekday_Weekend),mean)
 	colnames(avgsteps2) <- c("Interval","Weektime","Avg_Steps")
